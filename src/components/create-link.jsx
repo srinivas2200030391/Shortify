@@ -7,6 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import config from "./config";
 import { Input } from "@/components/ui/input";
 import { Card } from "./ui/card";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -135,7 +136,7 @@ export function CreateLink() {
             <QRCode
               ref={ref}
               size={250}
-              value={`https://shortify.vercel.app/${formValues?.customUrl}`}
+              value={`${config.baseUrl}/${formValues?.customUrl}`}
               style={{ alignItems: "center" }}
             />
           )}
@@ -155,7 +156,7 @@ export function CreateLink() {
           />
           {errors.longUrl && <Error message={errors.longUrl} />}
           <div className="flex items-center gap-2">
-            <Card className="p-2">shortify.vercel.app</Card> /
+            <Card className="p-2 w-[100%] text-[15px]">{config.baseUrl.slice(8)}</Card> /
             <Input
               id="customUrl"
               placeholder="Custom Link (optional)"

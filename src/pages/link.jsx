@@ -1,3 +1,4 @@
+import config from "@/components/config";
 import DeviceStats from "@/components/device-stats";
 import Location from "@/components/location-stats";
 import { Button } from "@/components/ui/button";
@@ -76,10 +77,10 @@ const LinkPage = () => {
             {url?.title}
           </span>
           <a
-            href={`https://shortify.vercel.app/${link}`}
+            href={`${config.baseUrl}/${link}`}
             target="_blank"
-            className=" text-3xl text-blue-400 font-bold hover:underline cursor-pointer">
-            https://shortify.vercel.app/{link}
+            className=" text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
+            {config.baseUrl}/{link}
           </a>
           <a
             href={url?.original_url}
@@ -95,7 +96,7 @@ const LinkPage = () => {
             <Button
               variant="ghost"
               onClick={() =>
-                navigator.clipboard.writeText(`https://trimrr.in/${link}`)
+                navigator.clipboard.writeText(`${config.baseUrl}/${link}`)
               }>
               <Copy />
             </Button>

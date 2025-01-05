@@ -5,6 +5,7 @@ import { Button } from "./ui/button";
 import useFetch from "@/hooks/use-fetch";
 import { deleteUrl } from "@/db/apiUrls";
 import { BeatLoader } from "react-spinners";
+import config from "./config";
 
 const LinkCard = ({ url = [], fetchUrls }) => {
   const downloadImage = () => {
@@ -40,7 +41,7 @@ const LinkCard = ({ url = [], fetchUrls }) => {
           {url?.title}
         </span>
         <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-          https://shortify.vercel.app/
+          {config.baseUrl}
           {url?.custom_url ? url?.custom_url : url.short_url}
         </span>
         <span className="flex items-center gap-1 hover:underline cursor-pointer">
@@ -55,9 +56,7 @@ const LinkCard = ({ url = [], fetchUrls }) => {
         <Button
           variant="ghost"
           onClick={() =>
-            navigator.clipboard.writeText(
-              `https://shortify.vercel.app/${url?.short_url}`
-            )
+            navigator.clipboard.writeText(`${config.baseUrl}/${url?.short_url}`)
           }>
           <Copy />
         </Button>
