@@ -1,4 +1,9 @@
 {
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/:id", "dest": "/index.html" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
   "rewrites": [
     {
       "source": "/:id",
