@@ -1,7 +1,7 @@
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
-import {useState} from "react";
-import {useNavigate} from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Accordion,
   AccordionContent,
@@ -45,7 +45,7 @@ const LandingPage = () => {
       <Accordion type="multiple" collapsible className="w-full md:px-11">
         <AccordionItem value="item-1">
           <AccordionTrigger>
-            How does the  URL shortener works?
+            How does the Shortify URL shortener works?
           </AccordionTrigger>
           <AccordionContent>
             When you enter a long URL, our system generates a shorter version of
