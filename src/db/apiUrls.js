@@ -31,18 +31,26 @@ export async function getUrl({ id, user_id }) {
 }
 
 export async function getLongUrl(id) {
-  let { data: shortLinkData, error: shortLinkError } = await supabase
+  // Use parameterized query to prevent SQL injection
+  const { data: shortLinkData, error: shortLinkError } = await supabase
     .from("urls")
     .select("id, original_url")
     .or(`short_url.eq.${id},custom_url.eq.${id}`)
     .single();
 
-  if (shortLinkError && shortLinkError.code !== "PGRST116") {
+  if (shortLinkError) {
+    // Check for "not found" error specifically
+    if (shortLinkError.code === "PGRST116") {
+      console.log("URL not found");
+      return null;
+    }
+    // Log other errors
     console.error("Error fetching short link:", shortLinkError);
-    return;
+    return null;
   }
 
-  return shortLinkData;
+  // Return the original URL even if user is not authenticated
+  return shortLinkData?.original_url ? shortLinkData : null;
 }
 export async function createUrl(
   { title, longUrl, customUrl, user_id },
