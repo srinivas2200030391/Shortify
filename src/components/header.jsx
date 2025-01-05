@@ -6,20 +6,23 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {logout} from "@/db/apiAuth";
+import { logout } from "@/db/apiAuth";
 import useFetch from "@/hooks/use-fetch";
-import {Avatar, AvatarFallback, AvatarImage} from "@radix-ui/react-avatar";
-import {LinkIcon, LogOut} from "lucide-react";
-import {Link, useNavigate} from "react-router-dom";
-import {BarLoader} from "react-spinners";
-import {Button} from "./ui/button";
-import {UrlState} from "@/context";
+import { Avatar, AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
+import { LinkIcon, LogOut } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { BarLoader } from "react-spinners";
+import { Button } from "./ui/button";
+import { UrlState } from "@/context";
 
 const Header = () => {
-  const {loading, fn: fnLogout} = useFetch(logout);
+  const { loading, fn: fnLogout } = useFetch(logout);
   const navigate = useNavigate();
 
-  const {user, fetchUser} = UrlState();
+  const { user, fetchUser } = UrlState();
+  const handleLogOut = () => {
+    localStorage.clear();
+  };
 
   return (
     <>
@@ -56,10 +59,9 @@ const Header = () => {
                       navigate("/auth");
                     });
                   }}
-                  className="text-red-400"
-                >
+                  className="text-red-400">
                   <LogOut className="mr-2 h-4 w-4" />
-                  <span>Logout</span>
+                  <span onClick={handleLogOut}>Logout</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
